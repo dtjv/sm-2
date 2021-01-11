@@ -4,7 +4,8 @@
   "description": "An implementation of sm-2 algorithm",
   "main": "dist/index.js",
   "scripts": {
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "David J. Valles <davidtjvalles@gmail.com>",
