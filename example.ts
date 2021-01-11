@@ -19,7 +19,7 @@ let card: Card = {
   term: '☕️',
   definition: '🤩🤩🤩',
   rep: 0,
-  repInterval: 1,
+  repInterval: 0,
   eFactor: 2.5,
 }
 
