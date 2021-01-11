@@ -1,60 +1,42 @@
-//------------------------------------------------------------------------------
-// module
-//------------------------------------------------------------------------------
-type SuperMemoGrade = 0 | 1 | 2 | 3 | 4 | 5
+export enum SuperMemoQuality {
+  FAIL_WITH_TOTAL_BLACKOUT,
+  FAIL_BUT_FAMILIAR,
+  FAIL_BUT_EASY,
+  PASS_WITH_DIFFICULTY,
+  PASS_WITH_HESITATION,
+  PASS_WITH_PERFECT_RECALL,
+}
 
-interface SuperMemoItem {
+export interface SuperMemoItem {
   rep: number
   repInterval: number
   eFactor: number
 }
 
-const sm2 = (item: SuperMemoItem, grade: SuperMemoGrade): SuperMemoItem => {
+export const sm2 = (
+  item: SuperMemoItem,
+  grade: SuperMemoQuality
+): SuperMemoItem => {
   const newItem: SuperMemoItem = { rep: 0, repInterval: 1, eFactor: 2.5 }
 
-  newItem.rep = grade < 3 ? 1 : item.rep + 1
+  if (grade >= SuperMemoQuality.PASS_WITH_DIFFICULTY) {
+    newItem.rep = item.rep + 1
 
-  newItem.eFactor =
-    item.eFactor < 1.3
-      ? 1.3
-      : item.eFactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02))
+    newItem.repInterval =
+      item.rep === 0
+        ? 1
+        : item.rep === 1
+        ? 6
+        : Math.ceil(item.repInterval * item.eFactor)
 
-  newItem.repInterval =
-    newItem.rep === 1
-      ? 1
-      : newItem.rep === 2
-      ? 6
-      : Math.ceil(item.repInterval * item.eFactor)
+    newItem.eFactor =
+      item.eFactor < 1.3
+        ? 1.3
+        : item.eFactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02))
+  } else {
+    newItem.rep = 0
+    newItem.repInterval = 1
+  }
 
   return newItem
 }
-
-//------------------------------------------------------------------------------
-// app
-//------------------------------------------------------------------------------
-
-interface Card extends SuperMemoItem {
-  data: string
-}
-
-let card: Card = {
-  data: '',
-  rep: 0,
-  repInterval: 1,
-  eFactor: 2.5,
-}
-
-const practice = (card: Card, grade: SuperMemoGrade): Card => ({
-  ...card,
-  ...sm2(card, grade),
-})
-
-console.log(card)
-
-const grades: SuperMemoGrade[] = [2, 3, 4, 2, 4, 4, 5]
-
-grades.forEach((grade) => {
-  console.log(grade)
-  card = practice(card, grade)
-  console.log(card)
-})
