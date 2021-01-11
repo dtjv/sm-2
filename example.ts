@@ -20,7 +20,7 @@ let card: Card = {
   definition: '🤩🤩🤩',
   rep: 0,
   repInterval: 0,
-  eFactor: 2.5,
+  easyFactor: 2.5,
 }
 
 const grades: SuperMemoQuality[] = [
