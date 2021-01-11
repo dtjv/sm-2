@@ -6,6 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "format": "prettier --write .",
+    "lint": "xo",
     "build": "del-cli dist && tsc",
     "prepublishOnly": "npm run build",
     "example": "npm run build && tsc example.ts --outDir dist && node dist/example.js"
@@ -17,6 +18,16 @@
     "@dtjv/tsconfig": "0.1.1",
     "del-cli": "3.0.1",
     "prettier": "2.2.1",
-    "typescript": "4.1.3"
+    "typescript": "4.1.3",
+    "xo": "0.37.1"
+  },
+  "xo": {
+    "prettier": true,
+    "parserOptions": {
+      "project": "./tsconfig.xo.json"
+    },
+    "ignores": [
+      "example.ts"
+    ]
   }
 }
