@@ -1,6 +1,6 @@
 {
   "extends": "@dtjv/tsconfig",
-  "files": ["src/index.ts", "example.ts"],
+  "include": ["src"],
   "compilerOptions": {
     "lib": ["dom", "ES2020"],
     "outDir": "dist"
