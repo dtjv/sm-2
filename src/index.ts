@@ -8,35 +8,39 @@ export enum SuperMemoQuality {
 }
 
 export interface SuperMemoItem {
-  rep: number
-  repInterval: number
-  eFactor: number
+  readonly rep: number
+  readonly repInterval: number
+  readonly eFactor: number
 }
 
 export const sm2 = (
   item: SuperMemoItem,
   grade: SuperMemoQuality
 ): SuperMemoItem => {
-  const newItem: SuperMemoItem = { rep: 0, repInterval: 0, eFactor: 2.5 }
+  let rep = 0
+  let repInterval = 0
+  let eFactor = 2.5
 
   if (grade >= SuperMemoQuality.PASS_WITH_DIFFICULTY) {
-    newItem.rep = item.rep + 1
+    rep = item.rep + 1
 
-    newItem.repInterval =
+    repInterval =
       item.rep === 0
         ? 1
         : item.rep === 1
         ? 6
         : Math.ceil(item.repInterval * item.eFactor)
 
-    newItem.eFactor =
+    eFactor =
       item.eFactor < 1.3
         ? 1.3
         : item.eFactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02))
   } else {
-    newItem.rep = 0
-    newItem.repInterval = 0
+    rep = 0
+    repInterval = 0
   }
+
+  const newItem: SuperMemoItem = { rep, repInterval, eFactor }
 
   return newItem
 }
