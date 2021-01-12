@@ -52,6 +52,11 @@ card = { ...card, ...sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL) }
  */
 ```
 
+## Reference
+
+- https://www.supermemo.com/en/archives1990-2015/english/ol/sm2
+- https://en.wikipedia.org/wiki/SuperMemo
+
 ## License
 
 [MIT License](LICENSE)

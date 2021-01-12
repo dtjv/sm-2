@@ -2,6 +2,23 @@
   "name": "@dtjv/sm-2",
   "version": "0.1.0",
   "description": "An implementation of sm-2 algorithm",
+  "author": "David J. Valles <davidtjvalles@gmail.com>",
+  "keywords": [
+    "supermemo",
+    "sm2",
+    "space repetition"
+  ],
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dtjv/sm-2"
+  },
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -13,9 +30,6 @@
     "postinstall": "npm run build",
     "example": "tsc example.ts --outDir dist && node dist/example.js"
   },
-  "keywords": [],
-  "author": "David J. Valles <davidtjvalles@gmail.com>",
-  "license": "MIT",
   "devDependencies": {
     "@dtjv/tsconfig": "0.1.1",
     "@types/tap": "14.10.1",
