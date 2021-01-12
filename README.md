@@ -5,7 +5,7 @@ An implementation of the [SM-2](https://super-memory.com/english/ol/sm2.htm) alg
 ## Install
 
 ```sh
-$ npm install @dtjv/sm2
+$ npm install @dtjv/sm-2
 ```
 
 ## Example
@@ -24,7 +24,7 @@ import {
   SuperMemoItem,
   SuperMemoQuality,
   SuperMemoDefaultItem,
-} from '@dtjv/sm2'
+} from '@dtjv/sm-2'
 
 interface Card extends SuperMemoItem {
   term: string
