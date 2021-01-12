@@ -1,5 +1,10 @@
 import { test } from 'tap'
-import { sm2, SuperMemoItem, SuperMemoQuality } from '../src'
+import {
+  sm2,
+  SuperMemoItem,
+  SuperMemoQuality,
+  SuperMemoDefaultItem,
+} from '../src'
 
 test('sm2', async (t) => {
   const grades: SuperMemoQuality[] = [
@@ -20,9 +25,7 @@ test('sm2', async (t) => {
   ]
 
   let item: SuperMemoItem = {
-    rep: 0,
-    repInterval: 0,
-    easyFactor: 2.5,
+    ...SuperMemoDefaultItem,
   }
 
   const results = grades.map((grade) => {
