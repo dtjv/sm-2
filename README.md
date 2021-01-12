@@ -32,22 +32,22 @@ interface Card extends SuperMemoItem {
 }
 
 let card: Card = {
-  term: '☕️',
-  definition: '🤩🤩🤩',
-  ...SuperMemoDefaultItem, // read-only properties added
+  term: '🍩',
+  definition: '😋😋😋',
+  ...SuperMemoDefaultItem, // adds read-only default values
 }
 
 card = { ...card, ...sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL) }
 
 /*
  * expect `card` to be:
-
+ *
  * {
- *   term: '☕️',
- *   definition: '🤩🤩🤩',
+ *   term: '🍩',
+ *   definition: '😋😋😋',
  *   rep: 1,
  *   repInterval: 1,
- *   eFactor: 2.36,
+ *   easyFactor: 2.36,
  * }
  */
 ```
