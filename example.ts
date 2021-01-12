@@ -3,7 +3,7 @@
 //
 // To run this example, type: `npm run example`
 // -----------------------------------------------------------------------------
-import { sm2, SuperMemoItem, SuperMemoQuality } from '.'
+import { sm2, SuperMemoItem, SuperMemoQuality, SuperMemoDefaultItem } from '.'
 
 interface Card extends SuperMemoItem {
   term: string
@@ -18,19 +18,13 @@ const studyCard = (card: Card, grade: SuperMemoQuality): Card => ({
 let card: Card = {
   term: '☕️',
   definition: '🤩🤩🤩',
-  rep: 0,
-  repInterval: 0,
-  easyFactor: 2.5,
+  ...SuperMemoDefaultItem,
 }
 
 const grades: SuperMemoQuality[] = [
   SuperMemoQuality.FAIL_BUT_EASY,
   SuperMemoQuality.PASS_WITH_DIFFICULTY,
   SuperMemoQuality.PASS_WITH_HESITATION,
-  SuperMemoQuality.FAIL_BUT_EASY,
-  SuperMemoQuality.PASS_WITH_HESITATION,
-  SuperMemoQuality.PASS_WITH_HESITATION,
-  SuperMemoQuality.PASS_WITH_PERFECT_RECALL,
 ]
 
 console.log(card)

@@ -8,7 +8,7 @@ An implementation of the [SM-2](https://super-memory.com/english/ol/sm2.htm) alg
 $ npm install @dtjv/sm2
 ```
 
-## Demo
+## Example
 
 ```sh
 $ npm run example
@@ -19,31 +19,29 @@ $ npm run example
 > _If you use CommonJS, then require the module as `const { sm2 } = require('@dtjv/sm2')`_
 
 ```typescript
-import { sm2, SuperMemoItem, SuperMemoQuality } from '@dtjv/sm2'
+import {
+  sm2,
+  SuperMemoItem,
+  SuperMemoQuality,
+  SuperMemoDefaultItem,
+} from '@dtjv/sm2'
 
 interface Card extends SuperMemoItem {
   term: string
   definition: string
 }
 
-const studyCard = (card: Card, grade: SuperMemoQuality): Card => ({
-  ...card,
-  ...sm2(card, grade),
-})
-
 let card: Card = {
   term: '☕️',
   definition: '🤩🤩🤩',
-  rep: 0,
-  repInterval: 0,
-  eFactor: 2.5,
+  ...SuperMemoDefaultItem, // read-only properties added
 }
 
-card = studyCard(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
-console.log(card)
+card = { ...card, ...sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL) }
+
 /*
- * Expect:
- *
+ * expect `card` to be:
+
  * {
  *   term: '☕️',
  *   definition: '🤩🤩🤩',
