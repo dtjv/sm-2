@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import { test } from 'tap'
 import {
   sm2,
@@ -28,7 +30,6 @@ test('sm2', async (t) => {
     ...SuperMemoDefaultItem,
   }
 
-  // process `item` repeatedly
   const results = grades.map((grade) => {
     item = sm2(item, grade)
     return item
