@@ -28,6 +28,7 @@ test('sm2', async (t) => {
     ...SuperMemoDefaultItem,
   }
 
+  // process `item` repeatedly
   const results = grades.map((grade) => {
     item = sm2(item, grade)
     return item
@@ -107,4 +108,49 @@ test('sm2', async (t) => {
   ]
 
   t.deepEqual(results, expected)
+})
+
+test('sm2 returns all item properties', async (t) => {
+  interface Card extends SuperMemoItem {
+    term: string
+    definition: string
+  }
+
+  const card: Card = {
+    term: '☕️',
+    definition: '🤩🤩🤩',
+    ...SuperMemoDefaultItem,
+  }
+  const expected = {
+    term: '☕️',
+    definition: '🤩🤩🤩',
+    rep: 1,
+    repInterval: 1,
+    easyFactor: 2.36,
+  }
+  const newCard: Card = sm2(card, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+
+  t.same(newCard, expected)
+})
+
+test('sm2 does not modify item passed in', async (t) => {
+  interface Card extends SuperMemoItem {
+    term: string
+    definition: string
+  }
+
+  const card: Card = {
+    term: '☕️',
+    definition: '🤩🤩🤩',
+    ...SuperMemoDefaultItem,
+  }
+  const expected = {
+    term: '☕️',
+    definition: '🤩🤩🤩',
+    ...SuperMemoDefaultItem,
+  }
+  const newCard: Card = sm2(card, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+
+  t.same(card, expected)
+  t.notSame(newCard, card)
 })
