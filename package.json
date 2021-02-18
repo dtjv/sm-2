@@ -41,9 +41,6 @@
     "prettier": true,
     "parserOptions": {
       "project": "./tsconfig.xo.json"
-    },
-    "ignores": [
-      "example.ts"
-    ]
+    }
   }
 }
