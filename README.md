@@ -8,15 +8,9 @@ An implementation of the [SM-2](https://super-memory.com/english/ol/sm2.htm) alg
 $ npm install @dtjv/sm-2
 ```
 
-## Example
-
-```sh
-$ npm run example
-```
-
 ## Usage
 
-> _If you use CommonJS, then require the module as `const { sm2 } = require('@dtjv/sm2')`_
+If you use CommonJS, then require the module as `const { sm2 } = require('@dtjv/sm2')`
 
 ```typescript
 import {
@@ -31,16 +25,16 @@ interface Card extends SuperMemoItem {
   definition: string
 }
 
-let card: Card = {
+const card: Card = {
   term: '🍩',
   definition: '😋😋😋',
   ...SuperMemoDefaultItem, // adds read-only default values
 }
 
-card = { ...card, ...sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL) }
+const newCard = sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
 
 /*
- * expect `card` to be:
+ * expect `newCard` to be:
  *
  * {
  *   term: '🍩',
@@ -51,6 +45,10 @@ card = { ...card, ...sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL) }
  * }
  */
 ```
+
+## Author
+
+- [David Valles](https://dtjv.io)
 
 ## Reference
 
