@@ -19,10 +19,10 @@ export const SuperMemoDefaultItem: SuperMemoItem = {
   easyFactor: 2.5,
 }
 
-export const sm2 = (
-  item: SuperMemoItem,
+export const sm2 = <T extends SuperMemoItem>(
+  item: T,
   grade: SuperMemoQuality
-): SuperMemoItem => {
+): T => {
   let rep = 0
   let repInterval = 0
   let easyFactor = 2.5
@@ -48,7 +48,7 @@ export const sm2 = (
     repInterval = 0
   }
 
-  const newItem: SuperMemoItem = { rep, repInterval, easyFactor }
+  const newItem: T = { ...item, rep, repInterval, easyFactor }
 
   return newItem
 }
