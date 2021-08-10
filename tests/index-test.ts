@@ -108,7 +108,7 @@ test('sm2', async (t) => {
     },
   ]
 
-  t.deepEqual(results, expected)
+  t.same(results, expected)
 })
 
 test('sm2 returns all item properties', async (t) => {
