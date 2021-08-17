@@ -1,157 +1,70 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
 import { test } from 'tap'
-import {
-  sm2,
-  SuperMemoItem,
-  SuperMemoQuality,
-  SuperMemoDefaultItem,
-} from '../src'
+import { sm2, SuperMemoQuality, SuperMemoItemDefaults } from '../src'
+import type { SuperMemoItem } from '../src'
 
-test('sm2', async (t) => {
-  const grades: SuperMemoQuality[] = [
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.FAIL_WITH_TOTAL_BLACKOUT,
-    SuperMemoQuality.FAIL_BUT_EASY,
-    SuperMemoQuality.PASS_WITH_DIFFICULTY,
-    SuperMemoQuality.PASS_WITH_HESITATION,
-    SuperMemoQuality.PASS_WITH_PERFECT_RECALL,
-  ]
-
-  let item: SuperMemoItem = {
-    ...SuperMemoDefaultItem,
-  }
-
-  const results = grades.map((grade) => {
-    item = sm2(item, grade)
-    return item
-  })
-
-  const expected = [
-    {
-      rep: 1,
-      repInterval: 1,
-      easyFactor: 2.36,
-    },
-    {
-      rep: 2,
-      repInterval: 6,
-      easyFactor: 2.2199999999999998,
-    },
-    {
-      rep: 3,
-      repInterval: 14,
-      easyFactor: 2.0799999999999996,
-    },
-    {
-      rep: 4,
-      repInterval: 30,
-      easyFactor: 1.9399999999999997,
-    },
-    {
-      rep: 5,
-      repInterval: 59,
-      easyFactor: 1.7999999999999998,
-    },
-    {
-      rep: 6,
-      repInterval: 107,
-      easyFactor: 1.66,
-    },
-    {
-      rep: 7,
-      repInterval: 178,
-      easyFactor: 1.52,
-    },
-    {
-      rep: 8,
-      repInterval: 271,
-      easyFactor: 1.3800000000000001,
-    },
-    {
-      rep: 9,
-      repInterval: 374,
-      easyFactor: 1.3,
-    },
-    {
-      rep: 0,
-      repInterval: 0,
-      easyFactor: 2.5,
-    },
-    {
-      rep: 0,
-      repInterval: 0,
-      easyFactor: 2.5,
-    },
-    {
-      rep: 1,
-      repInterval: 1,
-      easyFactor: 2.36,
-    },
-    {
-      rep: 2,
-      repInterval: 6,
-      easyFactor: 2.36,
-    },
-    {
-      rep: 3,
-      repInterval: 15,
-      easyFactor: 2.46,
-    },
-  ]
-
-  t.same(results, expected)
+test('returns correct interval for rep 1', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+  t.same(item.repInterval, 1)
 })
 
-test('sm2 returns all item properties', async (t) => {
-  interface Card extends SuperMemoItem {
-    term: string
-    definition: string
-  }
-
-  const card: Card = {
-    term: '☕️',
-    definition: '🤩🤩🤩',
-    ...SuperMemoDefaultItem,
-  }
-  const expected = {
-    term: '☕️',
-    definition: '🤩🤩🤩',
-    rep: 1,
-    repInterval: 1,
-    easyFactor: 2.36,
-  }
-  const newCard: Card = sm2(card, SuperMemoQuality.PASS_WITH_DIFFICULTY)
-
-  t.same(newCard, expected)
+test('returns correct interval for rep 2', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+  t.same(item.repInterval, 6)
 })
 
-test('sm2 does not modify item passed in', async (t) => {
-  interface Card extends SuperMemoItem {
-    term: string
-    definition: string
+test('returns correct interval for rep > 2', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+
+  const prevRepInterval = item.repInterval
+
+  item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
+  t.same(item.repInterval, Math.ceil(prevRepInterval * item.easyFactor))
+})
+
+test('a 4 quality rating does not change E-Factor', async (t) => {
+  const item1: SuperMemoItem = { ...SuperMemoItemDefaults }
+  const item2: SuperMemoItem = sm2(item1, SuperMemoQuality.PASS_WITH_HESITATION)
+  t.same(item1.easyFactor, item2.easyFactor)
+})
+
+test('returns rep and repInterval defaults for quality rating 0', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
+  item = sm2(item, SuperMemoQuality.FAIL_WITH_TOTAL_BLACKOUT)
+  t.same(item.rep, SuperMemoItemDefaults.rep)
+  t.same(item.repInterval, SuperMemoItemDefaults.repInterval)
+})
+
+test('returns rep and repInterval defaults for quality rating 1', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
+  item = sm2(item, SuperMemoQuality.FAIL_BUT_FAMILIAR)
+  t.same(item.rep, SuperMemoItemDefaults.rep)
+  t.same(item.repInterval, SuperMemoItemDefaults.repInterval)
+})
+
+test('returns rep and repInterval defaults for quality rating 2', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  item = sm2(item, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
+  item = sm2(item, SuperMemoQuality.FAIL_BUT_EASY)
+  t.same(item.rep, SuperMemoItemDefaults.rep)
+  t.same(item.repInterval, SuperMemoItemDefaults.repInterval)
+})
+
+test('limits E-Factor to 1.3 for E-Factor < 1.3', async (t) => {
+  let item: SuperMemoItem = { ...SuperMemoItemDefaults }
+
+  // it takes 9 repetitions with rating of 3 to get an E-Factor < 1.3
+  for (let i = 0; i < 9; i += 1) {
+    item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
   }
 
-  const card: Card = {
-    term: '☕️',
-    definition: '🤩🤩🤩',
-    ...SuperMemoDefaultItem,
-  }
-  const expected = {
-    term: '☕️',
-    definition: '🤩🤩🤩',
-    ...SuperMemoDefaultItem,
-  }
-  const newCard: Card = sm2(card, SuperMemoQuality.PASS_WITH_DIFFICULTY)
-
-  t.same(card, expected)
-  t.notSame(newCard, card)
+  t.same(item.easyFactor, 1.3)
 })
