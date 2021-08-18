@@ -2,7 +2,7 @@
   "extends": "@dtjv/tsconfig",
   "include": ["src"],
   "compilerOptions": {
-    "lib": ["dom", "ES2020"],
+    "lib": ["ESNext"],
     "outDir": "dist"
   }
 }
