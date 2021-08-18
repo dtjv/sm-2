@@ -1,6 +1,6 @@
 {
   "name": "@dtjv/sm-2",
-  "version": "0.1.1",
+  "version": "2.0.0",
   "description": "An implementation of sm-2 algorithm",
   "author": "David J. Valles <davidtjvalles@gmail.com>",
   "keywords": [
