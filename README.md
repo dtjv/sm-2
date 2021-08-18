@@ -17,7 +17,7 @@ import {
   sm2,
   SuperMemoItem,
   SuperMemoQuality,
-  SuperMemoDefaultItem,
+  SuperMemoItemDefaults,
 } from '@dtjv/sm-2'
 
 interface Card extends SuperMemoItem {
@@ -28,7 +28,7 @@ interface Card extends SuperMemoItem {
 const card: Card = {
   term: '🍩',
   definition: '😋😋😋',
-  ...SuperMemoDefaultItem, // adds read-only default values
+  ...SuperMemoItemDefaults, // adds read-only default values
 }
 
 const newCard = sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
@@ -41,7 +41,7 @@ const newCard = sm2(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
  *   definition: '😋😋😋',
  *   rep: 1,
  *   repInterval: 1,
- *   easyFactor: 2.36,
+ *   easyFactor: 2.6,
  * }
  */
 ```
