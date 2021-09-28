@@ -30,14 +30,14 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@dtjv/tsconfig": "0.1.1",
+    "@dtjv/tsconfig": "0.1.2",
     "@types/tap": "15.0.5",
     "del-cli": "4.0.1",
     "eslint-config-xo-typescript": "0.44.0",
-    "prettier": "2.3.2",
-    "tap": "15.0.9",
-    "ts-node": "10.2.0",
-    "typescript": "4.3.5",
+    "prettier": "2.4.1",
+    "tap": "15.0.10",
+    "ts-node": "10.2.1",
+    "typescript": "4.4.3",
     "xo": "0.44.0"
   },
   "xo": {
