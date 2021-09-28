@@ -31,7 +31,7 @@ export const sm2 = <T extends SuperMemoItem>(
     rep = 0
     repInterval = 1
   } else {
-    easyFactor = easyFactor + (0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02))
+    easyFactor += 0.1 - (5 - grade) * (0.08 + (5 - grade) * 0.02)
 
     if (easyFactor < 1.3) {
       easyFactor = 1.3
