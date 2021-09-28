@@ -23,6 +23,14 @@ export const sm2 = <T extends SuperMemoItem>(
   item: T,
   grade: SuperMemoQuality
 ): T => {
+  if (!isSuperMemoItem<T>(item)) {
+    throw new TypeError(`Parameter 'item' must be type 'SuperMemoItem'.`)
+  }
+
+  if (!isGrade(grade)) {
+    throw new TypeError(`Parameter 'grade' must be a 'SuperMemoQuality' value.`)
+  }
+
   let { rep, repInterval, easyFactor } = item
 
   rep += 1
@@ -42,4 +50,17 @@ export const sm2 = <T extends SuperMemoItem>(
   }
 
   return { ...item, rep, repInterval, easyFactor }
+}
+
+function isSuperMemoItem<T>(item: T): boolean {
+  return Object.keys(SuperMemoItemDefaults).every((key) => key in item)
+}
+
+function isGrade(grade: number): boolean {
+  const grades = [
+    ...Object.keys(SuperMemoQuality)
+      .map((grade) => Number.parseInt(grade, 10))
+      .filter((grade) => !Number.isNaN(grade)),
+  ]
+  return grades.includes(grade)
 }

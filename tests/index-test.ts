@@ -4,6 +4,19 @@ import { test } from 'tap'
 import { sm2, SuperMemoQuality, SuperMemoItemDefaults } from '../src'
 import type { SuperMemoItem } from '../src'
 
+test('should throw on invalid item', async (t) => {
+  t.throws(() => sm2(undefined, SuperMemoQuality.PASS_WITH_DIFFICULTY))
+  // Expected type checking error for '{}' argument. Ign re.
+  t.throws(() => sm2({}, SuperMemoQuality.PASS_WITH_DIFFICULTY))
+})
+
+test('should throw on invalid grade', async (t) => {
+  const item: SuperMemoItem = { ...SuperMemoItemDefaults }
+  // Expected type checking error for 'undefined' argument. Ignore.
+  t.throws(() => sm2(item, undefined), 'grade must be defined')
+  t.throws(() => sm2({ ...SuperMemoItemDefaults }, 7), 'grade must be in range')
+})
+
 test('returns correct interval for rep 1', async (t) => {
   let item: SuperMemoItem = { ...SuperMemoItemDefaults }
   item = sm2(item, SuperMemoQuality.PASS_WITH_DIFFICULTY)
