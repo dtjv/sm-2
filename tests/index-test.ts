@@ -6,7 +6,7 @@ import type { SuperMemoItem } from '../src'
 
 test('should throw on invalid item', async (t) => {
   t.throws(() => sm2(undefined, SuperMemoQuality.PASS_WITH_DIFFICULTY))
-  // Expected type checking error for '{}' argument. Ign re.
+  // Expected type checking error for '{}' argument. Ignore.
   t.throws(() => sm2({}, SuperMemoQuality.PASS_WITH_DIFFICULTY))
 })
 
