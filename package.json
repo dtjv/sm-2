@@ -34,6 +34,7 @@
     "@types/tap": "15.0.5",
     "del-cli": "4.0.1",
     "eslint-config-xo-typescript": "0.44.0",
+    "eslint-plugin-prettier": "4.0.0",
     "prettier": "2.4.1",
     "tap": "15.0.10",
     "ts-node": "10.2.1",
