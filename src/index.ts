@@ -52,9 +52,12 @@ export const sm2 = <T extends SuperMemoItem>(
   return { ...item, rep, repInterval, easyFactor }
 }
 
-function isSuperMemoItem(item: any): boolean {
-  return Object.keys(SuperMemoItemDefaults).every(
-    (key) => key in item && typeof item[key] === 'number'
+function isSuperMemoItem(item: SuperMemoItem): boolean {
+  const { rep, repInterval, easyFactor } = item
+  return (
+    typeof rep === 'number' &&
+    typeof repInterval === 'number' &&
+    typeof easyFactor === 'number'
   )
 }
 
