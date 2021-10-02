@@ -23,7 +23,7 @@ export const sm2 = <T extends SuperMemoItem>(
   item: T,
   grade: SuperMemoQuality
 ): T => {
-  if (!isSuperMemoItem<T>(item)) {
+  if (!isSuperMemoItem(item)) {
     throw new TypeError(`Parameter 'item' must be type 'SuperMemoItem'.`)
   }
 
@@ -52,8 +52,10 @@ export const sm2 = <T extends SuperMemoItem>(
   return { ...item, rep, repInterval, easyFactor }
 }
 
-function isSuperMemoItem<T>(item: T): boolean {
-  return Object.keys(SuperMemoItemDefaults).every((key) => key in item)
+function isSuperMemoItem(item: any): boolean {
+  return Object.keys(SuperMemoItemDefaults).every(
+    (key) => key in item && typeof item[key] === 'number'
+  )
 }
 
 function isGrade(grade: number): boolean {

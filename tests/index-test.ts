@@ -8,6 +8,12 @@ test('should throw on invalid item', async (t) => {
   t.throws(() => sm2(undefined, SuperMemoQuality.PASS_WITH_DIFFICULTY))
   // Expected type checking error for '{}' argument. Ignore.
   t.throws(() => sm2({}, SuperMemoQuality.PASS_WITH_DIFFICULTY))
+  t.throws(() =>
+    sm2(
+      { rep: '0', repInterval: '0', easyFactor: true },
+      SuperMemoQuality.PASS_WITH_DIFFICULTY
+    )
+  )
 })
 
 test('should throw on invalid grade', async (t) => {
@@ -15,6 +21,17 @@ test('should throw on invalid grade', async (t) => {
   // Expected type checking error for 'undefined' argument. Ignore.
   t.throws(() => sm2(item, undefined), 'grade must be defined')
   t.throws(() => sm2({ ...SuperMemoItemDefaults }, 7), 'grade must be in range')
+})
+
+test('should return a new item', async (t) => {
+  interface Item extends SuperMemoItem {
+    a: string
+    b: number
+  }
+  const item: Item = { a: 'a', b: 0, ...SuperMemoItemDefaults }
+  const actual = sm2(item, SuperMemoQuality.FAIL_WITH_TOTAL_BLACKOUT)
+  t.same(actual, item, 'should each have same values')
+  t.not(actual, item, 'should not be the same obj reference')
 })
 
 test('returns correct interval for rep 1', async (t) => {
