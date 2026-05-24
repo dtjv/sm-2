@@ -1,5 +1,7 @@
 # SM-2
 
+**This project is archived.**
+
 An implementation of the [SM-2](https://super-memory.com/english/ol/sm2.htm) algorithm written in TypeScript.
 
 ## Install
