@@ -4,6 +4,7 @@ node_modules
 # test output
 coverage
 .nyc_output
+.tap
 
 # lock files
 yarn.lock
