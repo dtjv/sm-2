@@ -10,15 +10,13 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 12
-          - 14
-          - 16
+          - 20
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           check-latest: true
-      - run: yarn
-      - run: yarn lint
-      - run: yarn test
+      - run: npm
+      - run: npm run lint
+      - run: npm test
