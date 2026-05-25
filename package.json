@@ -1,6 +1,6 @@
 {
   "name": "@dtjv/sm-2",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "An implementation of sm-2 algorithm",
   "author": "David J. Valles <davidtjvalles@gmail.com>",
   "keywords": [
@@ -42,8 +42,12 @@
   },
   "xo": {
     "prettier": true,
-    "parserOptions": {
-      "project": "./tsconfig.xo.json"
+    "space": 2,
+    "languageOptions": {
+      "parserOptions": {
+        "projectService": false,
+        "project": "./tsconfig.xo.json"
+      }
     }
   }
 }

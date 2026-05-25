@@ -7,13 +7,13 @@ export enum SuperMemoQuality {
   PASS_WITH_PERFECT_RECALL,
 }
 
-export interface SuperMemoItem {
+export type SuperMemoItem = {
   readonly rep: number
   readonly repInterval: number
   readonly easyFactor: number
 }
 
-export const SuperMemoItemDefaults: SuperMemoItem = {
+export const superMemoItemDefaults: SuperMemoItem = {
   rep: 0,
   repInterval: 1,
   easyFactor: 2.5,

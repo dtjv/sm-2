@@ -1,6 +1,6 @@
-# SM-2
-
 **This project is archived.**
+
+# SM-2
 
 An implementation of the [SM-2](https://super-memory.com/english/ol/sm2.htm) algorithm written in TypeScript.
 
@@ -16,7 +16,7 @@ $ npm install @dtjv/sm-2
 
 ```javascript
 // example.js
-const { sm2, SuperMemoQuality, SuperMemoItemDefaults } = require('@dtjv/sm-2')
+const { sm2, SuperMemoQuality, superMemoItemDefaults } = require('@dtjv/sm-2')
 ```
 
 ### ESM
@@ -24,14 +24,14 @@ const { sm2, SuperMemoQuality, SuperMemoItemDefaults } = require('@dtjv/sm-2')
 ```javascript
 // example.mjs
 import SM2 from '@dtjv/sm-2'
-const { sm2, SuperMemoQuality, SuperMemoItemDefaults } = SM2
+const { sm2, SuperMemoQuality, superMemoItemDefaults } = SM2
 ```
 
 ### TypeScript
 
 ```typescript
 // example.ts
-import { sm2, SuperMemoQuality, SuperMemoItemDefaults } from '@dtjv/sm-2'
+import { sm2, SuperMemoQuality, superMemoItemDefaults } from '@dtjv/sm-2'
 import type { SuperMemoItem } from '@dtjv/sm-2'
 ```
 
@@ -42,7 +42,7 @@ For more examples, see [test file](./tests/index-test.ts).
 ```typescript
 // example.ts
 
-import { sm2, SuperMemoQuality, SuperMemoItemDefaults } from '@dtjv/sm-2'
+import { sm2, SuperMemoQuality, superMemoItemDefaults } from '@dtjv/sm-2'
 import type { SuperMemoItem } from '@dtjv/sm-2'
 
 interface Card extends SuperMemoItem {
@@ -53,7 +53,7 @@ interface Card extends SuperMemoItem {
 const card: Card = {
   term: '🍩',
   definition: '😋😋😋',
-  ...SuperMemoItemDefaults, // adds read-only default values
+  ...superMemoItemDefaults, // adds read-only default values
 }
 
 const newCard = sm2<Card>(card, SuperMemoQuality.PASS_WITH_PERFECT_RECALL)
