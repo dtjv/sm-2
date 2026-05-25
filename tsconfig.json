@@ -2,6 +2,7 @@
   "extends": "@dtjv/tsconfig",
   "include": ["src"],
   "compilerOptions": {
+    "rootDir": ".",
     "lib": ["ESNext"],
     "outDir": "dist"
   },
