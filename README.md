@@ -117,7 +117,7 @@ The quality grade used to compute new SM-2 values.
 
 ## Author
 
-- [David Valles](https://dtjv.io)
+- David Valles
 
 ## Reference
 
